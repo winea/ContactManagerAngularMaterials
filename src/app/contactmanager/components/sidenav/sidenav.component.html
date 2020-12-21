@@ -1,0 +1,60 @@
+<!-- <app-toolbar></app-toolbar> -->
+<!-- <router-outlet></router-outlet> -->
+
+<!-- <mat-sidenav-container class="app-sidenav-container"> -->
+  <!-- popriedades do sidenav opened e mode -->
+  <!-- mat-elevation-z10 eleva o sidenav -->
+  <!-- <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10"
+                opened="true"
+                mode="side">
+    <mat-toolbar color="primary">
+      Contacts
+    </mat-toolbar>
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <app-toolbar></app-toolbar>
+    <router-outlet></router-outlet>
+    <button type="button" mat-button (click)="sidenav.open()">Open Sidenav </button>
+  </div>
+
+</mat-sidenav-container> -->
+
+<!-- Trocar tema  [class.dark-theme]="isDarkTheme"-->
+<!-- [dir]="dir" mudar sidenav esquerda direita -->
+<mat-sidenav-container class="app-sidenav-container"
+                      [class.dark-theme]="isDarkTheme" [dir]="dir">
+  <!-- se for pequeno fecha -->
+  <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10"
+              [opened]="!isScreenSmall"
+              [mode]="isScreenSmall ? 'over' : 'side'">
+    <mat-toolbar color="primary">
+      Contacts
+    </mat-toolbar>
+
+    <!-- mostrar usuarios -->
+    <mat-nav-list>
+      <!-- como carrega dados de um observable que foi subscribed usar pipe async -->
+      <mat-list-item *ngFor="let user of users | async">
+        <!-- qdo clicar navegar na rota e passar o id do usuario -->
+        <a matLine [routerLink]="['/contactmanager', user.id]">
+          <mat-icon svgIcon="{{user.avatar}}"></mat-icon> {{ user.name }}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <!-- recebe o eventos emitido do toolbar -->
+    <app-toolbar (toggleTheme)="toggleTheme()"
+                 (toggleSidenav)="sidenav.toggle()"
+                 (toggleDir)="toggleDir()">
+    </app-toolbar>
+    <!-- margin -->
+    <div class="wrapper">
+    <router-outlet></router-outlet>
+    </div>
+    <!-- <button type="button" mat-button (click)="sidenav.open()">Open Sidenav </button> -->
+  </div>
+
+</mat-sidenav-container>

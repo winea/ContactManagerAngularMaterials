@@ -1,0 +1,22 @@
+ng g m demo\demo --flat --routing
+
+ng g c demo\buttons --skip-tests
+
+http://localhost:4200/demo/buttons
+
+ng g c demo\flexbox --skip-tests
+
+ npm i -s @angular/flex-layout@11.0.0-beta.33
+http://localhost:4200/demo/flexbox
+
+ng g m contactmanager
+
+ng g c contactmanager\contactmanager-app --flat --skip-tests --inline-style --inline-template
+
+ ng g c contactmanager\components\toolbar --skip-tests
+
+ ng g s contactmanager\services\user --skip-tests
+
+ng g class contactmanager\models\user --skip-tests
+
+ng g class contactmanager\models\note --skip-tests
